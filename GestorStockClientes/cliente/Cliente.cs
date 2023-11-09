@@ -30,7 +30,17 @@ namespace gestor_stock_clientes.Properties
 
         public XElement toXML()
         {
-            //Devolve un XElement de un cliente
+            XElement root = new XElement("cliente",
+                new XElement("nombre", this.nombre),
+                new XElement("direccion", this.direccionFacturacion));
+            XAttribute codigo = new XAttribute("cif", this.cif);
+            root.Add(codigo);
+            foreach (int valor in CodigoPiezasVendidas)
+            {
+                root.Add(new XElement("codigo", valor));
+            }
+
+            return root;
         }
         
         public string CIF

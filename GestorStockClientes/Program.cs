@@ -37,5 +37,6 @@ css.Add(c2);
 css.Add(c3);
 
 Clientes clientes = new Clientes(css);
-        
+
 Console.WriteLine(clientes);
+clientes.saveXML();

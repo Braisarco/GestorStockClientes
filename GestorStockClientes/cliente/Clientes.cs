@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Xml.Linq;
 
 namespace gestor_stock_clientes.Properties
 {
@@ -50,7 +51,22 @@ namespace gestor_stock_clientes.Properties
         {
             get => this.listaClientes;
         }
-
+        
+        public XElement toXML()
+        {
+            XElement root = new XElement("clientes");
+            foreach (Cliente cliente in this.listaClientes)
+            {
+                root.Add(cliente.toXML());
+            }
+            return root;
+        }
+        
+        public void saveXML()
+        {
+             toXML().Save("Pacientes.xml");
+        }
+        
         public override string ToString()
         {
             StringBuilder toret = new StringBuilder();
