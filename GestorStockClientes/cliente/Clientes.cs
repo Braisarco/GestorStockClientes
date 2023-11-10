@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -42,9 +43,16 @@ namespace gestor_stock_clientes.Properties
             }
         }
 
-        public void EliminarCliente(int cif)
+        public void EliminarCliente(string cif)
         {
-            //Eliminar un cliente con un cif concreto
+            foreach (Cliente cliente in this.listaClientes)
+            {
+                if (cliente.CIF.Equals(cif))
+                {
+                    this.listaClientes.Remove(cliente);
+                }
+            }
+            
         }
         
         public IEnumerable<Cliente> ListaClientes
@@ -52,7 +60,7 @@ namespace gestor_stock_clientes.Properties
             get => this.listaClientes;
         }
         
-        public XElement toXML()
+        private XElement toXML()
         {
             XElement root = new XElement("clientes");
             foreach (Cliente cliente in this.listaClientes)
@@ -65,6 +73,28 @@ namespace gestor_stock_clientes.Properties
         public void saveXML()
         {
              toXML().Save("Pacientes.xml");
+        }
+
+        public void fromXML(string fn)
+        {
+            List<Cliente> toret = new List<Cliente>();
+            XElement root = XElement.Load(fn);
+            IEnumerable<XElement> listaClientes = root.Elements("cliente");
+
+            foreach (XElement cliente in listaClientes)
+            {
+                string nombre = cliente.Element("nombre").Value;
+                string cif = cliente.Attribute("cif").Value;
+                string direccion = cliente.Element("direccion").Value;
+                List<int> codigos = new List<int>();
+                foreach (XElement codigo in cliente.Elements("codigo"))
+                {
+                    codigos.Append(int.Parse(codigo.Value));
+                }
+                toret.Add(new Cliente(cif,nombre,direccion,codigos));
+            }
+
+            this.listaClientes = toret;
         }
         
         public override string ToString()

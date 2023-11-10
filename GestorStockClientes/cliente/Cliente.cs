@@ -10,6 +10,7 @@ namespace gestor_stock_clientes.Properties
         private string direccionFacturacion;
         private List<int> codigoPiezasVendidas;
 
+        public Cliente(){ }
         public Cliente(string cif, string nombre)
         {
             this.cif = cif;
@@ -26,6 +27,15 @@ namespace gestor_stock_clientes.Properties
             {
                 this.codigoPiezasVendidas.Add(p.CIF);
             }
+        }
+        
+        public Cliente(string cif, string nombre, string direccion, List<int> piezas)
+        {
+            this.cif = cif;
+            this.nombre = nombre;
+            this.direccionFacturacion = direccion;
+            this.codigoPiezasVendidas = new List<int>();
+            this.codigoPiezasVendidas = piezas;
         }
 
         public XElement toXML()
