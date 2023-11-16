@@ -2,8 +2,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" Width="1080" Height="720"
+        MinWidth="600" MinHeight="200"
         x:Class="UI.MainWindow"
         Title="UI">
-    Welcome to Avalonia!
+    <DockPanel Margin="20">
+                <DockPanel>
+                        <StackPanel DockPanel.Dock="Left">
+                                <Label HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        Margin="0,0,120,0"
+                                        Name="nombrePestaña">
+                                        CLIENTES
+                                </Label>
+                        </StackPanel>
+                        <StackPanel DockPanel.Dock="Right"
+                                    Margin="20,0,100,0">
+                                <Button VerticalAlignment="Center">Buscar</Button>
+                        </StackPanel>
+                        <StackPanel DockPanel.Dock="Right">
+                                <DockPanel VerticalAlignment="Center">
+                                        <TextBox Watermark="Buscar" Name="buscador"/>
+                                </DockPanel>
+                        </StackPanel>
+                </DockPanel>
+        </DockPanel>
 </Window>
