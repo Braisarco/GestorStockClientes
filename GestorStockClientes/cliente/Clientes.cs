@@ -96,6 +96,30 @@ namespace gestor_stock_clientes.Properties
 
             this.listaClientes = toret;
         }
+
+        public List<Cliente> buscarClienteNombre(String nombre)
+        {
+            List<Cliente> toret = new List<Cliente>();
+            foreach (Cliente cliente in listaClientes)
+            {
+             if (cliente.Nombre.StartsWith(nombre)) {
+                 toret.Add(cliente);
+             }   
+            }
+            return toret;
+        }
+
+        public List<Cliente> buscarClienteCIF(String cif)
+        {
+            List<Cliente> toret = new List<Cliente>();
+            foreach (Cliente cliente in listaClientes)
+            {
+                if (cliente.CIF.StartsWith(cif)) {
+                    toret.Add(cliente);
+                }   
+            }
+            return toret;
+        }
         
         public override string ToString()
         {
